@@ -1,24 +1,21 @@
 from __future__ import unicode_literals
+
+import requests
 from future.builtins import super
-
 from datetime import timedelta
-
 from django.contrib.auth.models import User
 from django.contrib.messages import info, error
-
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.timezone import now
 from django.views.generic import ListView, CreateView, DetailView, TemplateView
-
 from mezzanine.accounts import get_profile_model
 from mezzanine.conf import settings
 from mezzanine.generic.models import ThreadedComment, Keyword
 from mezzanine.utils.views import paginate
-
 from drum.links.forms import LinkForm
 from drum.links.models import Link
 from drum.links.utils import order_by_score
-
+from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseBadRequest
 
 # Returns the name to be used for reverse profile lookups from the user
 # object. That's "profile" for the ``drum.links.Profile``, but otherwise
@@ -77,7 +74,7 @@ class ScoreOrderingView(UserFilterView):
         else:
             qs = qs.order_by("-" + self.date_field)
         context["object_list"] = paginate(qs, self.request.GET.get("page", 1),
-            settings.ITEMS_PER_PAGE, settings.MAX_PAGING_LINKS)
+                                          settings.ITEMS_PER_PAGE, settings.MAX_PAGING_LINKS)
         # Update context_object_name variable
         context_object_name = self.get_context_object_name(context["object_list"])
         context[context_object_name] = context["object_list"]
@@ -90,6 +87,7 @@ class LinkView(object):
     List and detail view mixin for links - just defines the correct
     queryset.
     """
+
     def get_queryset(self):
         return Link.objects.published().select_related(
             "user",
@@ -200,3 +198,29 @@ class CommentList(ScoreOrderingView):
 
 class TagList(TemplateView):
     template_name = "links/tag_list.html"
+
+
+def proxy(request):
+    """
+    Proxy to use cross domain Ajax GET and POST requests
+    :param request:  Django request object
+    """
+    if request.method == 'GET':
+        request = request.GET
+        r = requests.get
+    elif request.method == 'POST':
+        request = request.POST
+        r = requests.post
+    else:
+        return HttpResponseNotAllowed("Permitted methods are POST and GET")
+    params = request.dict()
+    try:
+        url = params.pop('url')
+    except KeyError:
+        return HttpResponseBadRequest("URL must be defined")
+    try:
+        response = r(url, params=params)
+    except Exception as e:
+        return HttpResponseBadRequest(e)
+    ret = HttpResponse(response.text, status=int(response.status_code))
+    return ret

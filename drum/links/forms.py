@@ -6,7 +6,7 @@ from django.forms import ValidationError
 from drum.links.models import Link
 
 
-BaseLinkForm = modelform_factory(Link, fields=["title", "link", "description"])
+BaseLinkForm = modelform_factory(Link, fields=["title", "link", "description", "main_image"])
 
 
 class LinkForm(BaseLinkForm):

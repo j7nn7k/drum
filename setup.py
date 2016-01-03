@@ -53,6 +53,7 @@ try:
         install_requires=[
             "mezzanine >= 4.0.1",
             "sphinx-me",
+            "requests==2.9.1",
         ],
 
         classifiers=[

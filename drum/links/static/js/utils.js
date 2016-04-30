@@ -38,6 +38,7 @@ $(document).ready(function () {
 
     var simplemde = new SimpleMDE({
         element: $("#id_description")[0],
+        spellChecker: false,
         toolbar: ["bold", "italic", "unordered-list", "ordered-list", "heading-2", "heading-3", "link", "|", "preview", "|", "guide"]
     });
 });

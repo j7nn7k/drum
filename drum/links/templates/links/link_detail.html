@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load mezzanine_tags rating_tags keyword_tags comment_tags drum_tags future %}
+{% load mezzanine_tags rating_tags keyword_tags comment_tags drum_tags future markdown_deux_tags %}
 
 {% block meta_description %}{% metablock %}{{ object.description }}{% endmetablock %}{% endblock %}
 {% block meta_title %}{{ object.title }}{% endblock %}
@@ -11,7 +11,7 @@
 
 {% block main %}
 <div class="link-view">
-    <p class="description">{{ object.description }}</p>
+    <p class="description">{{ object.description|markdown }}</p>
     <div class="link-meta">
         {% rating_for object %}
         by <a href="{% url "profile" object.user.username %}">{{ object.user|get_profile }}</a>

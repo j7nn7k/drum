@@ -54,6 +54,8 @@ try:
             "mezzanine >= 4.0.1",
             "sphinx-me",
             "requests==2.9.1",
+            "django-pagedown==0.1.1",
+            "django-markdown-deux==1.0.5",
         ],
 
         classifiers=[

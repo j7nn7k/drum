@@ -39,3 +39,11 @@ def order_comments_by_score_for(context, link):
 @register.filter
 def short_timesince(date):
     return timesince(date).split(",")[0]
+
+
+@register.simple_tag
+def percentage_of(old_price, new_price):
+    if old_price <= 0:
+        return 0
+    return 100 - int(new_price * 100 / old_price)
+

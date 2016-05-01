@@ -7,28 +7,31 @@
 
 {% block main %}
 
-{% for link in object_list %}
-<div class="link-item clearfix">
-    {% if not profile_user %}{% rating_for link %}{% endif %}
-    <div class="link-detail{% if link.rating_sum < 0 %} link-negative{% endif %}">
-        <h2>
-            <a href="{{ link.url }}">{{ link.title }}</a>
-            <span class="domain">({{ link.domain }})</span>
-        </h2>
-        by <a class="profile" href="{% url "profile" link.user.username %}">{{ link.user|get_profile }}</a>
-        {{ link.publish_date|short_timesince }} ago |
-        {% keywords_for link as tags %}
-        {% for tag in tags %}
-        <a href="{% url "link_list_tag" tag.slug %}">{{ tag }}</a> |
-        {% endfor %}
-        <a class="comments" href="{{ link.get_absolute_url }}">{{ link.comments_count }} comment{{ link.comments_count|pluralize }} </a>
-        {% if link.new_price %}<span class="price">€{{ link.new_price }} {% if link.old_price %}(€<del>{{ link.old_price }}</del> ){% endif %}</span>{% endif %}
-    </div>
-</div>
-{% empty %}
-<p>{{ no_data }}</p>
-{% endfor %}
+    {% for link in object_list %}
+        <div class="link-item clearfix">
+            {% if not profile_user %}{% rating_for link %}{% endif %}
+            <div class="link-detail{% if link.rating_sum < 0 %} link-negative{% endif %}">
+                <h2>
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                    <span class="domain">({{ link.domain }})</span>
+                </h2>
+                by <a class="profile" href="{% url "profile" link.user.username %}">{{ link.user|get_profile }}</a>
+                {{ link.publish_date|short_timesince }} ago |
+                {% keywords_for link as tags %}
+                {% for tag in tags %}
+                    <a href="{% url "link_list_tag" tag.slug %}">{{ tag }}</a> |
+                {% endfor %}
+                <a class="comments" href="{{ link.get_absolute_url }}">{{ link.comments_count }}
+                    comment{{ link.comments_count|pluralize }} </a>
+                {% if link.new_price %}<span class="price">€{{ link.new_price }} {% if link.old_price %}(€
+                    <del>{{ link.old_price }}</del> ) -{% percentage_of link.old_price link.new_price %}
+                    %{% endif %}</span>{% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <p>{{ no_data }}</p>
+    {% endfor %}
 
-{% pagination_for object_list "page" "pjax" %}
+    {% pagination_for object_list "page" "pjax" %}
 
 {% endblock %}

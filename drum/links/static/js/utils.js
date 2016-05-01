@@ -36,11 +36,13 @@ $(document).ready(function () {
         $(".main-image-preview").attr("src", $("#id_main_image").val());
     });
 
-    var simplemde = new SimpleMDE({
-        element: $("#id_description")[0],
-        spellChecker: false,
-        toolbar: ["bold", "italic", "unordered-list", "ordered-list", "heading-2", "heading-3", "link", "|", "preview", "|", "guide"]
-    });
+    if ($("#id_description")) {
+        var simplemde = new SimpleMDE({
+            element: $("#id_description")[0],
+            spellChecker: false,
+            toolbar: ["bold", "italic", "unordered-list", "ordered-list", "heading-2", "heading-3", "link", "|", "preview", "|", "guide"]
+        });
+    }
 });
 
 var links = {

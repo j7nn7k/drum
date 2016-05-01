@@ -20,7 +20,7 @@ class LinkAdmin(DisplayableAdmin):
 
     fieldsets = (
         (None, {
-            "fields": ("title", "link", "status", "publish_date", "user", "main_image", "description"),
+            "fields": ("title", "link", "old_price", "new_price", "status", "publish_date", "user", "main_image", "description"),
         }),
     )
 

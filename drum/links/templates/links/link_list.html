@@ -22,6 +22,7 @@
         <a href="{% url "link_list_tag" tag.slug %}">{{ tag }}</a> |
         {% endfor %}
         <a class="comments" href="{{ link.get_absolute_url }}">{{ link.comments_count }} comment{{ link.comments_count|pluralize }} </a>
+        {% if link.new_price %}<span class="price">€{{ link.new_price }} {% if link.old_price %}(€<del>{{ link.old_price }}</del> ){% endif %}</span>{% endif %}
     </div>
 </div>
 {% empty %}

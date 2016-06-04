@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="{{ STATIC_URL }}css/flat-ui.css">
 <link rel="stylesheet" href="{{ STATIC_URL }}css/drum.css">
 <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap2-responsive.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/keywords.css">
 {% endcompress %}
 
 {% compress js %}
@@ -29,6 +30,7 @@
 <script src="{{ STATIC_URL }}js/drum.js"></script>
 <script src="{{ STATIC_URL }}js/utils.js"></script>
 <script src="{{ STATIC_URL }}js/jquery.pjax.js"></script>
+<script src="{{ STATIC_URL }}js/mezzanine_keywords_field.js"></script>
 {% endcompress %}
 
 {% block extra_head %}{% endblock %}
@@ -106,6 +108,10 @@
 </footer>
 
 {% include "includes/footer_scripts.html" %}
+
+<script>
+    window.__admin_keywords_submit_url = '{% url "admin_keywords_submit" %}';
+</script>
 
 </body>
 </html>

@@ -1,2 +1,8 @@
-.vTextField {max-width:150px;}
+.vTextField {
+    pointer-events: none;
+    border: 0;
+}
 .deletelink {display:none !important;}
+.keywords-field a {
+    margin-right: 1rem;
+}

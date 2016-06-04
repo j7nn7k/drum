@@ -1,4 +1,15 @@
 $(document).ready(function () {
+
+    //CSRF Protection
+    var csrftoken = links.getCookie('csrftoken');
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!links.csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
     var $linkField = $("#id_link");
     $linkField.on("input", function () {
         var url = $linkField.val();
@@ -36,9 +47,10 @@ $(document).ready(function () {
         $(".main-image-preview").attr("src", $("#id_main_image").val());
     });
 
-    if ($("#id_description")) {
-        var simplemde = new SimpleMDE({
-            element: $("#id_description")[0],
+    var $smde = $("#id_description")[0];
+    if ($smde) {
+        new SimpleMDE({
+            element: $smde,
             spellChecker: false,
             toolbar: ["bold", "italic", "unordered-list", "ordered-list", "heading-2", "heading-3", "link", "|", "preview", "|", "guide"]
         });
@@ -76,5 +88,24 @@ var links = {
         domain = domain.split(":")[0];
 
         return protocol + domain;
+    },
+    getCookie: function (name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    },
+    csrfSafeMethod: function (method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
     }
 };

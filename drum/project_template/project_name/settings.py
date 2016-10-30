@@ -2,6 +2,7 @@
 from __future__ import absolute_import, unicode_literals
 import os
 from django.utils.translation import ugettext_lazy as _
+from django import VERSION as DJANGO_VERSION
 
 SECRET_KEY = "CHANGE_ME"
 
@@ -192,11 +193,36 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, *MEDIA_URL.strip("/").split("/"))
 # Package/module name to import the root urlpatterns from for the project.
 ROOT_URLCONF = "%s.urls" % PROJECT_APP
 
-# Put strings here, like "/home/html/django_templates"
-# or "C:/www/django/templates".
-# Always use forward slashes, even on Windows.
-# Don't forget to use absolute paths, not relative paths.
-TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),)
+
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [
+            os.path.join(PROJECT_ROOT, "templates")
+        ],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.debug",
+                "django.template.context_processors.i18n",
+                "django.template.context_processors.static",
+                "django.template.context_processors.media",
+                "django.template.context_processors.request",
+                "django.template.context_processors.tz",
+                "mezzanine.conf.context_processors.settings",
+                # "mezzanine.pages.context_processors.page",
+            ],
+            "builtins": [
+                "mezzanine.template.loader_tags",
+            ],
+        },
+    },
+]
+
+if DJANGO_VERSION < (1, 9):
+    del TEMPLATES[0]["OPTIONS"]["builtins"]
 
 
 ################
@@ -296,13 +322,15 @@ OPTIONAL_APPS = (
 ########
 
 # Drum-specific Mezzanine settings
-AUTH_PROFILE_MODULE = "links.Profile"
-SITE_TITLE = "Drum"
+ACCOUNTS_PROFILE_MODEL = "links.Profile"
+SITE_TITLE = "DEALS"
 RATINGS_RANGE = (-1, 1)
-RATINGS_ACCOUNT_REQUIRED = True
+RATINGS_ACCOUNT_REQUIRED = False
 COMMENTS_ACCOUNT_REQUIRED = True
 ACCOUNTS_PROFILE_VIEWS_ENABLED = True
 SEARCH_MODEL_CHOICES = ("links.Link",)
+
+ACCOUNTS_PROFILE_FORM_EXCLUDE_FIELDS = ("first_name", "last_name", "website", "bio")
 
 # Drum settings
 ALLOWED_DUPLICATE_LINK_HOURS = 24 * 7 * 3

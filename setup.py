@@ -51,7 +51,7 @@ try:
         packages=find_packages(),
 
         install_requires=[
-            "mezzanine >= 4.0.1",
+            "mezzanine >= 4.2.2",
             "sphinx-me",
             "requests==2.9.1",
             "django-pagedown==0.1.1",

@@ -113,6 +113,12 @@ all tags in the database to all links in the database, as would occur
 if they were newly created. The ``--remove`` option will cause all
 existing tags to be removed.
 
+Tests
+=====
+Install the requirements and run::
+
+    python runtests.py
+
 
 Contributing
 ============

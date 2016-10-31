@@ -17,6 +17,18 @@ class LinkFormsTests(TestCase):
         })
         self.assertTrue(form.is_valid())
 
+    def test_title_may_not_be_empty(self):
+        form = LinkForm({
+            "title": "",
+            "link": "http://test.com/",
+            "old_price": 22.22,
+            "new_price": 20.5,
+            "description": "What a good price!",
+            "main_image": "http://test.com/img.jpg",
+            "keywords": {},
+        })
+        self.assertFalse(form.is_valid())
+
     def test_if_old_price_is_float(self):
         form = LinkForm({
             "title": "Test title",

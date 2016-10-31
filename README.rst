@@ -113,12 +113,19 @@ all tags in the database to all links in the database, as would occur
 if they were newly created. The ``--remove`` option will cause all
 existing tags to be removed.
 
-Tests
-=====
+Running the tests
+=================
 Install the requirements and run::
 
     python runtests.py
 
+
+Running Django manage commands in development
+=============================================
+This project is a bit stubborn about running standalone. So I included a dev_manage.py and a dev_settings.py to be able
+to run django commands in development::
+
+    dev_mange.py makemigrations
 
 Contributing
 ============

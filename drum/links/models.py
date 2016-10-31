@@ -14,7 +14,7 @@ except ImportError:
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.db.models import Q, CharField, DecimalField
+from django.db.models import Q, CharField, DecimalField, BooleanField
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.utils.encoding import python_2_unicode_compatible
@@ -24,7 +24,6 @@ from mezzanine.core.models import Displayable, Ownable
 from mezzanine.core.request import current_request
 from mezzanine.generic.models import Rating, Keyword, AssignedKeyword
 from mezzanine.generic.fields import RatingField, CommentsField
-from mezzanine.utils.urls import slugify
 
 USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
 
@@ -42,6 +41,8 @@ class Link(Displayable, Ownable):
     old_price = DecimalField(_("Old Price"), help_text=_(
         "Optional field. The old or regular price of the product."),
                              max_digits=7, decimal_places=2, null=True, blank=True)
+    is_expired = BooleanField(_("Expired"), help_text=_(
+        "Indicates if the deal conditions still apply"), default=False)
 
     def get_absolute_url(self):
         return reverse("link_detail", kwargs={"slug": self.slug})

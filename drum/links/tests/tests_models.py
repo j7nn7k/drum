@@ -30,9 +30,13 @@ class LinkModelsTests(TestCase):
         l = Link()
         self.assertTrue(hasattr(l, 'main_image'))
 
-    #def test_has_is_expired_field(self):
-    #    l = Link()
-    #    self.assertTrue(hasattr(l, 'is_expired'))
+    def test_has_is_expired_field(self):
+        l = Link()
+        self.assertTrue(hasattr(l, 'is_expired'))
+
+    def test_has_deal_expiry_date_field(self):
+        l = Link()
+        self.assertTrue(hasattr(l, 'deal_expiry_date'))
 
 
 class ProfileModelsTests(TestCase):

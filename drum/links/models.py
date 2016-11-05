@@ -1,8 +1,6 @@
 from __future__ import unicode_literals
-from future import standard_library
 from future.builtins import int
 from re import sub, split
-from time import time
 from operator import ior
 from functools import reduce
 
@@ -14,7 +12,7 @@ except ImportError:
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.db.models import Q, CharField, DecimalField, BooleanField
+from django.db.models import Q, CharField, DecimalField, BooleanField, DateTimeField
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.utils.encoding import python_2_unicode_compatible
@@ -41,8 +39,9 @@ class Link(Displayable, Ownable):
     old_price = DecimalField(_("Old Price"), help_text=_(
         "Optional field. The old or regular price of the product."),
                              max_digits=7, decimal_places=2, null=True, blank=True)
-    is_expired = BooleanField(_("Expired"), help_text=_(
-        "Indicates if the deal conditions still apply"), default=False)
+    is_expired = BooleanField(_("Expired"), help_text=_("Indicates if the deal conditions still apply"), default=False)
+    deal_expiry_date = DateTimeField(_("Expires at"), help_text=_("Optional field. The deal expires at this date"),
+                                null=True, blank=True)
 
     def get_absolute_url(self):
         return reverse("link_detail", kwargs={"slug": self.slug})

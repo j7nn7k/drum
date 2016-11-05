@@ -1,4 +1,4 @@
-from unittest import TestCase
+from mezzanine.utils.tests import TestCase
 
 from drum.links.forms import LinkForm
 

@@ -117,7 +117,7 @@ Running the tests
 =================
 Install the requirements and run::
 
-    python runtests.py
+    python setup.py test
 
 
 Running Django manage commands in development

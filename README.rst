@@ -127,6 +127,25 @@ to run django commands in development::
 
     dev_mange.py makemigrations
 
+
+Crontab to let the links expire
+===============================
+Here's the guide: https://www.digitalocean.com/community/tutorials/how-to-use-cron-to-automate-tasks-on-a-vps
+
+Edit the crontabs::
+
+    crontab -e
+
+List the crontabs::
+
+    crontab -l
+
+This is what our crontab looks like::
+
+    07 03 * * * /usr/bin/python /home/django/project_name/project_name/manage.py expire_links
+    # minute, hour, day of the month, month, day of the week COMMAND
+
+
 Contributing
 ============
 

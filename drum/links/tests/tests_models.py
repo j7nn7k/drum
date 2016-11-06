@@ -1,11 +1,13 @@
-from mezzanine.utils.tests import TestCase
+import datetime
 
+from django.utils import timezone
+from freezegun import freeze_time
+from mezzanine.utils.tests import TestCase
 from django.contrib.auth.models import User
 from drum.links.models import Link, Profile
 
 
 class LinkModelsTests(TestCase):
-
     def test_has_link_field(self):
         l = Link()
         self.assertTrue(hasattr(l, 'link'))
@@ -39,8 +41,25 @@ class LinkModelsTests(TestCase):
         self.assertTrue(hasattr(l, 'deal_expiry_date'))
 
 
-class ProfileModelsTests(TestCase):
+@freeze_time("2016-11-06 15:00:00")
+class LinkManagerTests(TestCase):
+    def setUp(self):
+        super(LinkManagerTests, self).setUp()
+        self.user = User.objects.get(username='test')
+        Link.objects.create(title="Link is expired and flagged", link="http://expiredflagged.com/", is_expired=True,
+                            user=self.user, deal_expiry_date=timezone.now() - datetime.timedelta(days=5))
+        Link.objects.create(title="Link is expired and NOT flagged", link="http://expirednotflagged.com/",
+                            is_expired=False, user=self.user,
+                            deal_expiry_date=timezone.now() - datetime.timedelta(days=5))
+        Link.objects.create(title="Link is not expired", link="http://notexpired.com/", is_expired=False,
+                            user=self.user, deal_expiry_date=timezone.now() + datetime.timedelta(days=5))
 
+    def test_due_should_return_links_nonexpired_and_before_today(self):
+        self.assertEqual(1, len(Link.objects.due()))
+        self.assertEqual("Link is expired and NOT flagged", Link.objects.due()[0].title)
+
+
+class ProfileModelsTests(TestCase):
     def setUp(self):
         super(ProfileModelsTests, self).setUp()
         self.user = User.objects.get(username='test')

@@ -50,6 +50,7 @@ try:
         include_package_data=True,
         packages=find_packages(),
         test_suite="runtests.main",
+        tests_require=['freezegun==0.3.7'],
 
         install_requires=[
             "mezzanine >= 4.2.2",

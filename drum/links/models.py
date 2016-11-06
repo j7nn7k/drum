@@ -1,4 +1,6 @@
 from __future__ import unicode_literals
+
+from drum.links.manager import LinkManager
 from future.builtins import int
 from re import sub, split
 from operator import ior
@@ -42,6 +44,8 @@ class Link(Displayable, Ownable):
     is_expired = BooleanField(_("Expired"), help_text=_("Indicates if the deal conditions still apply"), default=False)
     deal_expiry_date = DateTimeField(_("Expires at"), help_text=_("Optional field. The deal expires at this date"),
                                 null=True, blank=True)
+
+    objects = LinkManager()
 
     def get_absolute_url(self):
         return reverse("link_detail", kwargs={"slug": self.slug})

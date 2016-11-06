@@ -6,7 +6,7 @@ from drum.links.models import Link
 
 
 BaseLinkForm = modelform_factory(Link, fields=["title", "link", "old_price", "new_price", "description", "main_image",
-                                               "keywords"])
+                                               "expiry_date", "keywords"])
 
 
 class LinkForm(BaseLinkForm):

@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-06 14:07+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: drum/dev_settings.py:114 drum/project_template/project_name/settings.py:114
+#: venv/lib/python2.7/site-packages/mezzanine/project_template/project_name/settings.py:115
+msgid "English"
+msgstr "Englisch"
+
+#: drum/links/models.py:35
+msgid "Product Image"
+msgstr "Produkt Bild"
+
+#: drum/links/models.py:36
+msgid ""
+"We try to load an image automatically. You can also set one yourself. E.g. "
+"http://example.com/image.png"
+msgstr "Wir versuchen das Bild automatisch zu laden. Du kannst aber auch eines selbst einfügen. Z.B. http://example.com/image.png"
+
+#: drum/links/models.py:38
+msgid "New Price"
+msgstr "Neuer Preis"
+
+#: drum/links/models.py:39
+msgid "Optional field. The new price of the product."
+msgstr "Optionales Feld. Der neue Preis für das Produkt"
+
+#: drum/links/models.py:40
+msgid "Old Price"
+msgstr "Alter Preis"
+
+#: drum/links/models.py:41
+msgid "Optional field. The old or regular price of the product."
+msgstr "Optionales Feld. Der alte Preis für das Produkt"
+
+#: drum/links/models.py:43
+msgid "Expired"
+msgstr "Ausgelaufen"
+
+#: drum/links/models.py:43
+msgid "Indicates if the deal conditions still apply"
+msgstr "Zeugt an, dass der Deal nicht mehr gültig ist"
+
+#: drum/links/models.py:44
+msgid "Expires at"
+msgstr "Ausgelaufen am"
+
+#: drum/links/models.py:44
+msgid "Optional field. The deal expires at this date"
+msgstr "Optionales Feld. Der Deal läuft an diesem Datum aus"
+
+#: drum/links/templates/accounts/includes/user_panel_nav.html:8
+msgid "Log out"
+msgstr "Ausloggen"
+
+#: drum/links/templates/accounts/includes/user_panel_nav.html:11
+msgid "Log in"
+msgstr "Einloggen"
+
+#: drum/links/templates/accounts/includes/user_panel_nav.html:13
+msgid "Sign up"
+msgstr "Registrieren"
+
+#: drum/links/templates/base.html:105
+msgid "Powered by"
+msgstr "Powerde by"
+
+#: drum/links/templates/generic/includes/comment.html:27
+msgid "Reply"
+msgstr "Antworten"
+
+#: drum/links/templates/includes/pagination.html:8
+msgid "Page"
+msgstr "Seite"
+
+#: drum/links/templates/includes/pagination.html:8
+msgid "of"
+msgstr ""
+
+#: drum/links/templates/includes/search_form.html:4
+msgid "Search"
+msgstr ""
+
+#: drum/links/templates/includes/search_form.html:11
+msgid "Everything"
+msgstr ""
+
+#: drum/links/templates/includes/search_form.html:22
+msgid "Go"
+msgstr ""

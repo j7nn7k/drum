@@ -1,5 +1,4 @@
 from __future__ import unicode_literals
-
 from drum.links.manager import LinkManager
 from future.builtins import int
 from re import sub, split
@@ -43,7 +42,7 @@ class Link(Displayable, Ownable):
                              max_digits=7, decimal_places=2, null=True, blank=True)
     is_expired = BooleanField(_("Expired"), help_text=_("Indicates if the deal conditions still apply"), default=False)
     deal_expiry_date = DateTimeField(_("Expires at"), help_text=_("Optional field. The deal expires at this date"),
-                                null=True, blank=True)
+                                     null=True, blank=True)
 
     objects = LinkManager()
 

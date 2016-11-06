@@ -13,4 +13,4 @@ class Command(BaseCommand):
         for l in links:
             l.is_expired = True
             l.save()
-            self.stdout.write(self.style.SUCCESS("Link \"{}\" expired on {}".format(l.title, l.deal_expiry_date)))
+            self.stdout.write("Link \"{}\" expired on {}".format(l.title, l.deal_expiry_date))
